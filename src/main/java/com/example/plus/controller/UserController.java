@@ -1,12 +1,16 @@
 package com.example.plus.controller;
 
 
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
+import com.example.plus.entity.User;
+import com.example.plus.exception.MyException;
 import com.example.plus.page.PageCondition;
 import com.example.plus.page.PageRequest;
 import com.example.plus.page.PageResponse;
+import com.example.plus.result.Result;
+import com.example.plus.result.ResultData;
 import com.example.plus.service.UserService;
 import com.example.plus.page.PageInitialize;
-import com.example.plus.util.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +33,11 @@ public class UserController {
     @Autowired
     private PageCondition pageCondition;
 
-    // @RequestMapping("/get")
-    // public Object getUser(@RequestBody User user){
-    //     System.out.println("注意入参是json格式的才行: "+user.getUserId());
-    //    return  userService.getUser(user.getUserId());
-    // }
+    @RequestMapping("/get")
+    public Object getUser(@RequestBody User user){
+        log.info("注意入参是json格式的才行: "+user.getUserId());
+       return  userService.getUser(user.getUserId());
+    }
 
 
     /**
@@ -44,8 +48,11 @@ public class UserController {
      */
     @GetMapping("/info/{userid}")
     public Object getUser(@PathVariable("userid") String userid) {
-        System.out.println("这种直接在接口传参数 ");
-        return userService.getUser(userid);
+        log.info("这种REST风格可以直接在接口传参数 ");
+        //模拟异常
+        // int i=1/0;
+        // throw new MyException("自定义异常哈!");
+         return userService.getUser(userid);
     }
 
 
@@ -58,9 +65,8 @@ public class UserController {
         log.info("查询条件condition===>" + condition);
         PageResponse pageResponse = userService.getUserPage(pageRequest);
         Result result = new Result();
-        result.setCode(200);
-        result.setMsg("查询用户信心成功!");
         result.setData(pageResponse);
+        ResultData.success("查询用户信心成功!",pageResponse);
         return result;
 
     }
