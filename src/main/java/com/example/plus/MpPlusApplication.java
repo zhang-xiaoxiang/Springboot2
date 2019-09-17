@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 /**
- * MpPlusApplication:
+ * MpPlusApplication:集成mybatis plus 单表条件分页 基本项目初始化
  *
  * @author zhangxiaoxiang
  * @date 2019/7/2
