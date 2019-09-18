@@ -81,5 +81,17 @@ public class UserController {
 
     }
 
+    @GetMapping("/page/multi-extra")
+    public Result getUserPage3(@RequestBody PageRequest pageRequest) {
+        /**
+         * 分页请求还原json格式(@RequestBody把json转成了java对象,所以为了需要就还原一下)
+         */
+        PageCondition condition = PageInitialize.getPageInitializeUtil(pageRequest.getPageCondition());
+        log.info("查询条件condition===>" + condition);
+        PageResponse pageResponse = userService.getUseralliancePage2(pageRequest);
+        return  ResultData.success("查询用户信心成功!",pageResponse);
+
+    }
+
 
 }

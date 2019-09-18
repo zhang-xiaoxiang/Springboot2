@@ -27,5 +27,13 @@ public interface UserDao extends BaseMapper<User> {
 //这里面有丰富的查询方法,自定义的也可以写在这里
 
     // List<Map<String,Object>> getBaseMap(PageCondition pageCondition);
-    List<Map<String,Object>> getBaseMap(PageCondition pageCondition);
+    List<Map<String, Object>> getBaseMap(PageCondition pageCondition);
+
+    /**
+     * 含有额为字段的结果映射
+     *
+     * @param pageCondition
+     * @return
+     */
+    List<Map<String, Object>> getBaseMap2(PageCondition pageCondition);
 }

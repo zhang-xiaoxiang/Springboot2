@@ -34,4 +34,12 @@ public interface UserService extends IService<User> {
      * @return
      */
     PageResponse getUseralliancePage (PageRequest pageRequest);
+
+    /**
+     * 多表条件分页
+     * 带有额为字段的封装处理
+     * @param pageRequest
+     * @return
+     */
+    PageResponse getUseralliancePage2(PageRequest pageRequest);
 }

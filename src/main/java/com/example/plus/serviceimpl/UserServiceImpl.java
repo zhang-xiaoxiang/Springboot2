@@ -97,4 +97,29 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         pageInfo.setPageSize(page.getPageSize());
         return pageResponse.getResultDataVO(pageInfo);
     }
+
+    /**
+     * 多表条件分页
+     * 带有额为字段的封装处理
+     *
+     * @param pageRequest
+     * @return
+     */
+    @Override
+    public PageResponse getUseralliancePage2(PageRequest pageRequest) {
+        Page page = PageHelper.startPage(pageRequest.getPageNavigation().getPageNum(), pageRequest.getPageNavigation().getPageSize());
+        List<Map<String, Object>> baseMap2 = userDao.getBaseMap2(pageRequest.getPageCondition());
+        List<BaseEntity> entityList = MybatisResultMap.getResultMap(baseMap2);
+        PageInfo<BaseEntity> pageInfo = new PageInfo<>(entityList);
+        /**
+         * 1:是因为在前面对PageInfo构造的时候不是分页的对象,中间经过特殊处理,那么list instanceof Page不成立,进入else if,查看源码
+         * 这里直接重新赋值,把丢失的数据赋值上去
+         */
+        pageInfo.setTotal(page.getTotal());
+        pageInfo.setPageNum(page.getPageNum());
+        pageInfo.setPageSize(page.getPageSize());
+        return pageResponse.getResultDataVO(pageInfo);
+
+
+    }
 }
