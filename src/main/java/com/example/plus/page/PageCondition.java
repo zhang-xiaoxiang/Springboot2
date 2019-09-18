@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * PageCondition:数据库分页条件
+ * 注意值最好加上引号,比如性别为  "userSex":"0" 这个条件就必须添加""
  * @author zhangxiaoxiang
  * @date 2019/9/15
  */

@@ -27,25 +27,25 @@
 
 
     </select>
-    <!--多表多字段的映射,但是如果两个表都没有的字段暂时貌似不行-->
-       <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
-           SELECT us.*,ad.address_region FROM user as us left JOIN address as ad  ON us.user_id=ad.user_id
-           <where>
-               <if test="map.map.get('userName')!=null and map.map.get('userName')!='' ">
-                   and (us.user_name LIKE CONCAT('%','${map.map.get('userName')}','%' )
-                   or us.user_phone LIKE CONCAT('%','${map.map.get('userName')}','%' ))
-               </if>
-               <if test="map.map.get('userSex')!=null and map.map.get('userSex')!=''">
-                   and (us.user_sex ='${map.map.get('userSex')}' )
-               </if>
-           </where>
+    <!--多表多字段的映射-->
+    <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
+        SELECT us.*,ad.address_region FROM user as us left JOIN address as ad ON us.user_id=ad.user_id
+        <where>
+            <if test="map.map.get('userName')!=null and map.map.get('userName')!='' ">
+                and (us.user_name LIKE CONCAT('%','${map.map.get('userName')}','%' )
+                or us.user_phone LIKE CONCAT('%','${map.map.get('userName')}','%' ))
+            </if>
+            <if test="map.map.get('userSex')!=null and map.map.get('userSex')!=''">
+                and (us.user_sex ='${map.map.get('userSex')}' )
+            </if>
+        </where>
 
 
-       </select>
-<!--    <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
+    </select>
+    <!--    <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
 
-     SELECT us.user_id,us.user_name,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id=33 and ad.user_id=33
-        </select>-->
+         SELECT us.user_id,us.user_name,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id=33 and ad.user_id=33
+            </select>-->
 
 
 </mapper>
