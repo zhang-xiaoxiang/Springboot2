@@ -47,7 +47,7 @@
 
         <select id="getBaseMap2" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
 
-         SELECT us.user_id,us.user_name,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
+         SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
             </select>
 
 
