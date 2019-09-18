@@ -22,11 +22,11 @@ public class MyControllerAdvice {
      * @param exception
      * @return
      */
-    @ResponseBody
-    @ExceptionHandler(value = Exception.class)
-    public Result exceptionHandler(Exception exception) {
-        return ResultData.error("系统故障");
-    }
+    // @ResponseBody
+    // @ExceptionHandler(value = Exception.class)
+    // public Result exceptionHandler(Exception exception) {
+    //     return ResultData.error("系统故障");
+    // }
 
 
     @ResponseBody

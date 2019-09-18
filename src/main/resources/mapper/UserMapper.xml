@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.plus.mapper.UserDao">
+<mapper namespace="com.example.plus.dao.UserDao">
     <!--需要些多表联查在这里写XML,一般的单表操作CRUD,分页等自带的方法就完全满足-->
-    <select id="selectUserList" resultType="com.example.plus.entity.User" parameterType="com.example.plus.page.PageCondition">
+    <select id="selectUserList" resultType="com.example.plus.entity.User"
+            parameterType="com.example.plus.page.PageCondition">
         select * from user
         <where>
 
@@ -20,10 +21,21 @@
             </if>
 
             <if test="map.map.get('startTime')!=null and map.map.get('startTime')!='' and map.map.get('endTime')!=null and map.map.get('endTime')!=''">
-                and (user_date_birth BETWEEN CONCAT('${map.map.get('startTime')}') AND CONCAT('${map.map.get('endTime')}' ))
+                and (user_date_birth BETWEEN CONCAT('${map.map.get('startTime')}') AND
+                CONCAT('${map.map.get('endTime')}' ))
             </if>
         </where>
 
 
     </select>
+    <!--多表多字段的映射,但是如果两个表都没有的字段暂时貌似不行-->
+    <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
+        SELECT us.*,ad.address_region FROM user as us left JOIN address as ad  ON us.user_id=ad.user_id
+    </select>
+    <!--    <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">-->
+    <!--     -->
+    <!--SELECT  us.user_id,us.user_name,ad.address_region,(SELECT count(ad.address_id)) as numb FROM user as us left JOIN address as ad  ON us.user_id=33 and ad.user_id=33-->
+    <!--    </select>-->
+
+
 </mapper>

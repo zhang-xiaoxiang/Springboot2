@@ -29,7 +29,7 @@ public class CodeGenerator {
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder help = new StringBuilder();
-        help.append("请输入" + tip + "：");
+        help.append("请输入数据库的表名" + tip + "：");
         System.out.println(help.toString());
         if (scanner.hasNext()) {
             String ipt = scanner.next();
@@ -61,17 +61,23 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/lvyou?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("root");
+        dsc.setPassword("daibin");
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         //pc.setModuleName(scanner("单模块不用配置"));
         pc.setParent("com.example.plus");
+        pc.setEntity("entity");
+        pc.setMapper("dao");
+        pc.setService("service");
+        pc.setServiceImpl("serviceimpl");
+        pc.setController("controller");
+        mpg.setPackageInfo(pc);
         mpg.setPackageInfo(pc);
 
         // 自定义配置

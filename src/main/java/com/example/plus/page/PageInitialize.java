@@ -20,7 +20,7 @@ public class PageInitialize {
     /**
      * 分页初始化
      *
-     * @param pageCondition
+     * @param pageCondition 入参转换为map,并组装到分页请求的类中,本质就是json转map
      * @return
      */
     public static PageCondition getPageInitializeUtil(PageCondition pageCondition) {

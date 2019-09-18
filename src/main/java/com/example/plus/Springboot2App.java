@@ -3,9 +3,7 @@ package com.example.plus;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
 
 
 /**
@@ -17,11 +15,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Slf4j
 //扫描dao层(也叫Mapper接口层,一个意思)
-@MapperScan("com.example.plus.mapper")
+@MapperScan("com.example.plus.dao")
 @SpringBootApplication
-public class MpPlusApplication {
+public class Springboot2App {
     public static void main(String[] args) {
-        SpringApplication.run(MpPlusApplication.class, args);
+        SpringApplication.run(Springboot2App.class, args);
         log.info("mybatis-plus 入门,官方文档");
         System.out.println("https://mp.baomidou.com/");
         System.out.println("根据用户ID查询  http://localhost:8080/user/get");

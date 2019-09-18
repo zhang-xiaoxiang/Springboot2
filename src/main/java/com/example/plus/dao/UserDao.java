@@ -1,10 +1,12 @@
-package com.example.plus.mapper;
+package com.example.plus.dao;
 
 import com.example.plus.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.plus.page.PageCondition;
+import com.example.plus.result.BaseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,4 +25,7 @@ public interface UserDao extends BaseMapper<User> {
      */
     List<User> selectUserList(PageCondition pageCondition);
 //这里面有丰富的查询方法,自定义的也可以写在这里
+
+    // List<Map<String,Object>> getBaseMap(PageCondition pageCondition);
+    List<Map<String,Object>> getBaseMap(PageCondition pageCondition);
 }

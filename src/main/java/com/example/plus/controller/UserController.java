@@ -64,10 +64,20 @@ public class UserController {
         PageCondition condition = PageInitialize.getPageInitializeUtil(pageRequest.getPageCondition());
         log.info("查询条件condition===>" + condition);
         PageResponse pageResponse = userService.getUserPage(pageRequest);
-        Result result = new Result();
-        result.setData(pageResponse);
-        ResultData.success("查询用户信心成功!",pageResponse);
+        Result result = ResultData.success("查询用户信心成功!", pageResponse);
         return result;
+
+    }
+
+    @GetMapping("/page/multi-table")
+    public Result getUserPage2(@RequestBody PageRequest pageRequest) {
+        /**
+         * 分页请求还原json格式(@RequestBody把json转成了java对象,所以为了需要就还原一下)
+         */
+        PageCondition condition = PageInitialize.getPageInitializeUtil(pageRequest.getPageCondition());
+        log.info("查询条件condition===>" + condition);
+        PageResponse pageResponse = userService.getUseralliancePage(pageRequest);
+        return  ResultData.success("查询用户信心成功!",pageResponse);
 
     }
 

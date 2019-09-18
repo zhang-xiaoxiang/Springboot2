@@ -22,9 +22,16 @@ public interface UserService extends IService<User> {
     User getUser(String id);
 
     /**
-     * 查询用户分页
+     * 单表条件分页
      * @param pageRequest
      * @return
      */
     PageResponse getUserPage(PageRequest pageRequest);
+
+    /**
+     * 多表条件分页(连表查询)
+     * @param pageRequest
+     * @return
+     */
+    PageResponse getUseralliancePage (PageRequest pageRequest);
 }

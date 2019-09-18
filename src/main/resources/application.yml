@@ -11,7 +11,7 @@ spring:
 #配置日志级别
 logging:
   level:
-    com.example.plus.mapper: debug
+    com.example.plus.dao: debug
 #mybatis plusxml路径配置
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
