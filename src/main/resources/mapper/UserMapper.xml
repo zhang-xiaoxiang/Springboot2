@@ -29,13 +29,13 @@
 
     </select>
     <!--多表多字段的映射,但是如果两个表都没有的字段暂时貌似不行-->
+    <!--   <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
+           SELECT us.*,ad.address_region FROM user as us left JOIN address as ad  ON us.user_id=ad.user_id
+       </select>-->
     <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
-        SELECT us.*,ad.address_region FROM user as us left JOIN address as ad  ON us.user_id=ad.user_id
-    </select>
-    <!--    <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">-->
-    <!--     -->
-    <!--SELECT  us.user_id,us.user_name,ad.address_region,(SELECT count(ad.address_id)) as numb FROM user as us left JOIN address as ad  ON us.user_id=33 and ad.user_id=33-->
-    <!--    </select>-->
+
+     SELECT us.user_id,us.user_name,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id=33 and ad.user_id=33
+        </select>
 
 
 </mapper>
