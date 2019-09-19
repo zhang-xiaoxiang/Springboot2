@@ -45,7 +45,12 @@
 
     <!--多表含有其他字段的字段的额外字段-->
 
-        <select id="getBaseMap2" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
+<!--        <select id="getBaseMap2" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
+
+         SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
+            </select>-->
+
+    <select id="getBaseMap2" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
 
          SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
             </select>
