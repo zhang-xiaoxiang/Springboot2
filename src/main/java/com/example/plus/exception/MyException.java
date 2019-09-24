@@ -1,6 +1,7 @@
 package com.example.plus.exception;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 
@@ -19,5 +20,7 @@ public class MyException extends RuntimeException implements Serializable {
 
     public MyException(String message) {
         this.message = message;
+
     }
+
 }
