@@ -38,17 +38,6 @@ public class UserController {
     @Autowired
     private PageCondition pageCondition;
 
-    /**
-     * 根据Id查询用户 json格式
-     *
-     * @param user
-     * @return
-     */
-    @GetMapping("/user")
-    public Result getUser(@RequestBody User user) {
-        //这里不用处理异常,有全局拦截异常的
-        return ResultData.success("根据id查询用户成功!", userService.getUser(user.getUserId()));
-    }
 
     /**
      * REST风格  根据Id查询用户
@@ -59,6 +48,21 @@ public class UserController {
     @GetMapping("/user/{userid}")
     public Result getUser(@PathVariable("userid") String userid) {
         return ResultData.success("REST风格 根据id查询用户成功!", userService.getUser(userid));
+    }
+    // ------------------------------------------REST风格--------------------------------------
+    // 增PostMapping 删 @DeleteMapping 改 @PutMapping 查 GetMapping 传参使用json @RequestBody或者 路径参数 @PathVariable()
+    // 代替?name=zhangsan的URL形式
+
+    /**
+     * 根据Id查询用户 json格式 REST风格
+     *
+     * @param user
+     * @return
+     */
+    @GetMapping("/user")
+    public Result getUser(@RequestBody User user) {
+        //这里不用处理异常,有全局拦截异常的
+        return ResultData.success("根据id查询用户成功!", userService.getUser(user.getUserId()));
     }
 
     /**
@@ -71,10 +75,11 @@ public class UserController {
     public Result add(@RequestBody User user) {
         //这里写业务代码是因为我要使用 数据库提供的通用方法,
         // 不用写dao,xml,service以及实现类impl,所以这里还是会涉及到一定的业务逻辑代码
+        //优点:方便快捷,缺点:不好定位错误原因
         user.setUserId(IdWorker.getSimpleId());
         user.setCreateTime(new Date());
         user.setUserDateBirth(new Date());
-        return  ResultData.success("添加成功!");
+        return ResultData.conditions(userService.save(user));
     }
 
     /**
@@ -85,7 +90,20 @@ public class UserController {
      */
     @PutMapping("/user")
     public Result upd(@RequestBody User user) {
+        if (user.getUserId() == null) {
+            return ResultData.error("用户ID不存在!");
+        }
         return ResultData.conditions(userService.updateById(user));
+    }
+
+    /**
+     * 根据ID删除用户
+     * @param user
+     * @return
+     */
+    @DeleteMapping("/user")
+    public Result del(@RequestBody User user) {
+        return ResultData.conditions(userService.removeById(user.getUserId()));
     }
 
 
