@@ -2,6 +2,7 @@ package com.example.plus.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
@@ -74,7 +75,7 @@ public class User implements Serializable {
     /**
      * 用户出生日期
      */
-    private LocalDateTime userDateBirth;
+    private Date userDateBirth;
 
     /**
      * 用户个性签名
@@ -89,12 +90,12 @@ public class User implements Serializable {
     /**
      * 移动设备唯一cid
      */
-    private String cId;
+    private String deviceId;
 
     /**
      * 用户注册时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
 }

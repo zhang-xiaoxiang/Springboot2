@@ -1,7 +1,6 @@
 package com.example.plus.controller;
 
 
-
 import com.example.plus.entity.Address;
 import com.example.plus.entity.User;
 import com.example.plus.entity.UserDto;
@@ -12,10 +11,12 @@ import com.example.plus.result.Result;
 import com.example.plus.result.ResultData;
 import com.example.plus.service.UserService;
 import com.example.plus.page.PageInitialize;
+import com.example.plus.util.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,10 +39,34 @@ public class UserController {
     @Autowired
     private PageCondition pageCondition;
 
+    /**
+     * 根据Id查询用户
+     *
+     * @param user
+     * @return
+     */
     @RequestMapping("/get")
     public Object getUser(@RequestBody User user) {
         log.info("注意入参是json格式的才行: " + user.getUserId());
         return userService.getUser(user.getUserId());
+    }
+
+    /**
+     * 添加用户
+     *
+     * @param user
+     * @return
+     */
+    @RequestMapping("/add")
+    public Result add(@RequestBody User user) {
+        user.setUserId(IdWorker.getSimpleId());
+        user.setCreateTime(new Date());
+        user.setUserDateBirth(new Date());
+        if (userService.save(user)) {
+            return ResultData.success("添加成功!");
+        } else {
+            return ResultData.error("添加失败1");
+        }
     }
 
 
@@ -139,7 +164,7 @@ public class UserController {
 
     @GetMapping("/get-address-list")
     public Result getAddressList(@RequestBody User user) {
-        List<Address> addresses = userService.getAddressList( user.getUserId());
+        List<Address> addresses = userService.getAddressList(user.getUserId());
         return ResultData.success("查询用户地址列表成功!", addresses);
     }
 
