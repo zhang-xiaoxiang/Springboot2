@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Wrapper;
+
 
 /**
  * <p>
@@ -91,6 +93,19 @@ public class UserController {
         log.info("查询条件condition===>" + condition);
         PageResponse pageResponse = userService.getUseralliancePage2(pageRequest);
         return  ResultData.success("查询用户信心成功!",pageResponse);
+
+    }
+
+    /**
+     * 测试直接将mybatis的结果集直接转换成json
+      * @param user
+     * @return
+     */
+    @GetMapping("/get-usermap")
+    public Result getUserMap(@RequestBody User user){
+      User user1=  userService.getUserMap(user.getUserId() );
+
+        return ResultData.success("查询成功!",user1);
 
     }
 

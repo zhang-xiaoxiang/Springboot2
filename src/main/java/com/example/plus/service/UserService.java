@@ -42,4 +42,11 @@ public interface UserService extends IService<User> {
      * @return
      */
     PageResponse getUseralliancePage2(PageRequest pageRequest);
+
+    /**
+     * 测试直接将mybatis的结果集直接转换成json
+     * @param userId
+     * @return
+     */
+    User getUserMap(String userId);
 }

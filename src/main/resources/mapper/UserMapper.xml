@@ -54,6 +54,9 @@
 
          SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
             </select>
+    <select id="getUserMap" resultType="com.example.plus.entity.User" >
+        SELECT * from user where user_id=#{userId}
+    </select>
 
 
 </mapper>

@@ -33,7 +33,7 @@ public class ResultData {
         Result result = new Result();
         result.setCode(200);
         result.setMsg(msg);
-        result.setData("");
+        result.setData(data);
         return result;
     }
 

@@ -98,6 +98,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         return pageResponse.getResultDataVO(pageInfo);
     }
 
+
+
     /**
      * 多表条件分页
      * 带有额为字段的封装处理
@@ -119,7 +121,19 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         pageInfo.setPageNum(page.getPageNum());
         pageInfo.setPageSize(page.getPageSize());
         return pageResponse.getResultDataVO(pageInfo);
+    }
+
+    /**
+     * 测试直接将mybatis的结果集直接转换成json
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public User getUserMap(String userId) {
+        User user=   userDao.getUserMap(userId);
 
 
+        return user;
     }
 }

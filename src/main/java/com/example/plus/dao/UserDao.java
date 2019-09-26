@@ -36,4 +36,11 @@ public interface UserDao extends BaseMapper<User> {
      * @return
      */
     List<Map<String, Object>> getBaseMap2(PageCondition pageCondition);
+    /**
+     * 测试直接将mybatis的结果集直接转换成json
+     *
+     * @param userId
+     * @return
+     */
+    User getUserMap(String userId);
 }
