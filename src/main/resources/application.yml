@@ -3,9 +3,9 @@ spring:
   datasource:
     #    mysql5(注意pom)
     driver-class-name: com.mysql.jdbc.Driver
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-      #    password: root
+    #    password: root
     password: daibin
     url: jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true
 #配置日志级别
@@ -15,3 +15,6 @@ logging:
 #mybatis plusxml路径配置
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
+#SQL查询空值结果时返回Map类型字段为空null时,前端报错undefined,所以为了考虑前端这样配置即可
+  configuration:
+    call-setters-on-nulls: true

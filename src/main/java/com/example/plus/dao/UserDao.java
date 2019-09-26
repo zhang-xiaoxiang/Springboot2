@@ -42,5 +42,5 @@ public interface UserDao extends BaseMapper<User> {
      * @param userId
      * @return
      */
-    User getUserMap(String userId);
+    Map getUserMap(String userId);
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.plus.dao.UserDao">
     <!--需要些多表联查在这里写XML,一般的单表操作CRUD,分页等自带的方法就完全满足-->
     <select id="selectUserList" resultType="com.example.plus.entity.User"
@@ -54,8 +55,9 @@
 
          SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
             </select>
-    <select id="getUserMap" resultType="com.example.plus.entity.User" >
-        SELECT * from user where user_id=#{userId}
+    <!--就是新增一个字段(统计地址数量)映射addressCount-->
+    <select id="getUserMap" resultType="java.util.Map" >
+        SELECT us.*,(select count(address_id)  from address  where user_id=#{userId}) as addressCount from user as us where us.user_id=#{userId}
     </select>
 
 

@@ -130,8 +130,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
      * @return
      */
     @Override
-    public User getUserMap(String userId) {
-        User user=   userDao.getUserMap(userId);
+    public Map getUserMap(String userId) {
+        Map user=   userDao.getUserMap(userId);
 
 
         return user;
