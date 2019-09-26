@@ -194,8 +194,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Override
     public Map userAddressListNew(String userId) {
         Map map=new HashMap(16);
+        // map.put("user",userDao.selectById(userId));//默认查询user
+        //对user封装一些字段,比如统计用户订单数的数量,地址数量
         map.put("user",userDao.userMoreById(userId));
-
         map.put("address",userDao.getAddressList(userId));
         //下面可以封装订单等等....和上面类似
         return map;
