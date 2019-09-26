@@ -80,5 +80,20 @@
 
     </select>
 
+    <!--用户列表带地址集合的,注意带上分页条件****************-->
+    <select id="selectUserList2" resultType="com.example.plus.entity.UserDto" parameterType="com.example.plus.page.PageCondition">
+
+        select * from address where user_id=#{userId} as `user`
+        <where>
+
+            <!-- 主键-->
+            <if test="map.map.get('userId')!=null and map.map.get('userId')!=''">
+                and (user_id ='${map.map.get('userId')}' )
+            </if>
+
+        </where>
+
+    </select>
+
 
 </mapper>

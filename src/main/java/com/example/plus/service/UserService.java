@@ -42,11 +42,20 @@ public interface UserService extends IService<User> {
     PageResponse getUserPage(PageRequest pageRequest);
 
     /**
+     * 用户分页带地址列表的
+     * @param pageRequest
+     * @return
+     */
+    PageResponse getUserPage2(PageRequest pageRequest);
+
+    /**
      * 多表条件分页(连表查询)
      * @param pageRequest
      * @return
      */
     PageResponse getUseralliancePage (PageRequest pageRequest);
+
+
 
     /**
      * 多表条件分页

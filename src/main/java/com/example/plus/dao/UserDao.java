@@ -19,6 +19,8 @@ import java.util.Map;
  * @since 2019-07-04
  */
 public interface UserDao extends BaseMapper<User> {
+    //这里面有丰富的查询方法,自定义的也可以写在这里
+
     /**
      * 分页条件查询数据库
      *
@@ -26,7 +28,15 @@ public interface UserDao extends BaseMapper<User> {
      * @return
      */
     List<User> selectUserList(PageCondition pageCondition);
-//这里面有丰富的查询方法,自定义的也可以写在这里
+
+
+    /**
+     * 用户列表带地址集合的(常规方式)
+     * @param pageCondition
+     * @return
+     */
+    List<UserDto> selectUserList2(PageCondition pageCondition);
+
 
     // List<Map<String,Object>> getBaseMap(PageCondition pageCondition);
     List<Map<String, Object>> getBaseMap(PageCondition pageCondition);
@@ -66,4 +76,6 @@ public interface UserDao extends BaseMapper<User> {
      * @return
      */
     Map userMoreById(String id);
+
+
 }

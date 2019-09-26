@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URLStreamHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
      */
     @Override
     public Map userMoreById(String id) {
-       Map userMap=userDao.userMoreById( id);
+        Map userMap = userDao.userMoreById(id);
         return userMap;
     }
 
@@ -77,9 +78,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         /**
          * 返回结果可以是多表联查的结果UserDto(最简单就是单表的),根据条件去数据库查询
          */
-        System.out.println("=====C查数据库"+pageRequest.getPageCondition().getMap());
+        System.out.println("=====C查数据库" + pageRequest.getPageCondition().getMap());
         List<User> userList = userDao.selectUserList(pageRequest.getPageCondition());
-        System.out.println("正常长度======>"+userList);
+        System.out.println("正常长度======>" + userList);
         /**
          * 把数据库查询出来的给插件分页
          */
@@ -88,6 +89,22 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
          * 返回分页后的数据
          */
         return pageResponse.getResultDataVO(pageInfo);
+    }
+
+    /**
+     * 用户分页带地址列表的
+     *
+     * @param pageRequest
+     * @return
+     */
+    @Override
+    public PageResponse getUserPage2(PageRequest pageRequest) {
+        PageHelper.startPage(pageRequest.getPageNavigation().getPageNumber(), pageRequest.getPageNavigation().getPageSize());
+        //查询出所有用户
+        //  查询所有用户的地址
+        // 组装DTO
+        // 分页
+        return null;
     }
 
     /**
@@ -111,7 +128,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         pageInfo.setPageSize(page.getPageSize());
         return pageResponse.getResultDataVO(pageInfo);
     }
-
 
 
     /**
@@ -145,7 +161,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
      */
     @Override
     public Map getUserMap(String userId) {
-        Map user=   userDao.getUserMap(userId);
+        Map user = userDao.getUserMap(userId);
 
 
         return user;
@@ -160,17 +176,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Override
     public UserDto userAddressList(String userId) {
         User user = userDao.selectById(userId);
-        UserDto userDto=new UserDto();
+        UserDto userDto = new UserDto();
         userDto.setUser(user);
         List<Address> addressList = userDao.getAddressList(userId);
         userDto.setAddresses(addressList);
         return userDto;
     }
-
-
-
-
-
 
 
     /**
@@ -193,11 +204,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
      */
     @Override
     public Map userAddressListNew(String userId) {
-        Map map=new HashMap(16);
+        Map map = new HashMap(16);
         // map.put("user",userDao.selectById(userId));//默认查询user
         //对user封装一些字段,比如统计用户订单数的数量,地址数量
-        map.put("user",userDao.userMoreById(userId));
-        map.put("address",userDao.getAddressList(userId));
+        map.put("user", userDao.userMoreById(userId));
+        map.put("address", userDao.getAddressList(userId));
         //下面可以封装订单等等....和上面类似
         return map;
     }

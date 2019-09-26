@@ -119,9 +119,18 @@ public class UserController {
         PageInitialize.getPageInitializeUtil(pageRequest.getPageCondition());
         PageResponse pageResponse = userService.getUserPage(pageRequest);
         return ResultData.success("查询用户信心成功!", pageResponse);
+    }
 
-
-
+    /**
+     *用户分页带地址列表的
+     * @param pageRequest
+     * @return
+     */
+    @GetMapping("/user/page/table")
+    public Result userAddressListNew2(@RequestBody PageRequest pageRequest) {
+        PageInitialize.getPageInitializeUtil(pageRequest.getPageCondition());
+        PageResponse pageResponse = userService.getUserPage2(pageRequest);
+        return ResultData.success("查询用户地址分页成功!", pageResponse);
     }
 
     /**
@@ -148,6 +157,8 @@ public class UserController {
         Map map = userService.userAddressListNew(user.getUserId());
         return ResultData.success("查询用户地址成功!", map);
     }
+
+
 
 
 
