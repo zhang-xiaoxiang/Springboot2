@@ -15,6 +15,6 @@ logging:
 #mybatis plusxml路径配置
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-#SQL查询空值结果时返回Map类型字段为空null时,前端报错undefined,所以为了考虑前端这样配置即可
-  configuration:
-    call-setters-on-nulls: true
+#SQL查询空值结果时返回Map类型字段为空null时,前端报错undefined,所以为了考虑前端这样配置即可(注意不生效的话这个要搞spring配置类才行)
+#  configuration:
+#    call-setters-on-nulls: true

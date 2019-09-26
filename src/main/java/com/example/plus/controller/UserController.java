@@ -121,9 +121,42 @@ public class UserController {
         return ResultData.success("查询用户信心成功!", pageResponse);
 
 
+
     }
 
-    @GetMapping("/page/multi-table")
+    /**
+     * 查询用户地址列表 -----常规方式(封装一个javabean去接收mybatis的结果集)
+     *
+     * @param user
+     * @return
+     */
+    @GetMapping("/user/page/address")
+    public Result userAddressList(@RequestBody User user) {
+        UserDto userDto = userService.userAddressList(user.getUserId());
+        return ResultData.success("查询用户地址成功!", userDto);
+    }
+
+    /**
+     * 查询用户地址(主要测试实体类封装List的处理)----新的方式
+     *
+     * @param user
+     * @return
+     */
+    @GetMapping("/user/page/address2")
+    public Result userAddressListNew(@RequestBody User user) {
+        //这个map里面很灵活,把SQL操作转换为代码实现,减少连表查询
+        Map map = userService.userAddressListNew(user.getUserId());
+        return ResultData.success("查询用户地址成功!", map);
+    }
+
+
+
+    /**
+     * 查询额外的一个字段 比如一个用户有2个地址,将展现为2条信息,最好的是1个用户信息带上地址集合----不是很推荐
+     * @param pageRequest
+     * @return
+     */
+    @GetMapping("/user/page/multi-extra")
     public Result getUserPage2(@RequestBody PageRequest pageRequest) {
         /**
          * 分页请求还原json格式(@RequestBody把json转成了java对象,所以为了需要就还原一下)
@@ -134,8 +167,12 @@ public class UserController {
         return ResultData.success("查询用户信心成功!", pageResponse);
 
     }
-
-    @GetMapping("/page/multi-extra")
+    /**
+     * 查询额外的一个字段 比如一个用户有2个地址,将展现为1条信息,表明有2个地址(统计字段)----仍不是很推荐
+     * @param pageRequest
+     * @return
+     */
+    @GetMapping("/page/multi-extra1")
     public Result getUserPage3(@RequestBody PageRequest pageRequest) {
         /**
          * 分页请求还原json格式(@RequestBody把json转成了java对象,所以为了需要就还原一下)
@@ -156,36 +193,15 @@ public class UserController {
     @GetMapping("/get-usermap")
     public Result getUserMap(@RequestBody User user) {
         Map map = userService.getUserMap(user.getUserId());
-
         return ResultData.success("查询成功!", map);
-
-    }
-
-    /**
-     * 查询用户地址(主要测试实体类封装List的处理)
-     *
-     * @param user
-     * @return
-     */
-    @GetMapping("/user-address-list")
-    public Result userAddressList(@RequestBody User user) {
-        UserDto userDto = userService.userAddressList(user.getUserId());
-        return ResultData.success("查询用户地址成功!", userDto);
     }
 
 
     /**
-     * 查询用户地址(主要测试实体类封装List的处理)----新的方式
      *
      * @param user
      * @return
      */
-    @GetMapping("/user-address-list-new")
-    public Result userAddressListNew(@RequestBody User user) {
-        Map map = userService.userAddressListNew(user.getUserId());
-        return ResultData.success("查询用户地址成功!", map);
-    }
-
     @GetMapping("/get-address-list")
     public Result getAddressList(@RequestBody User user) {
         List<Address> addresses = userService.getAddressList(user.getUserId());

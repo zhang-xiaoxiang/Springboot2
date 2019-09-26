@@ -30,20 +30,21 @@
 
 
     </select>
-    <!--多表多字段的映射-->
+
+    <!--多表多字段的映射,注意直接使用的Map接收-->
     <select id="getBaseMap" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
         SELECT us.*,ad.address_region FROM user as us left JOIN address as ad ON us.user_id=ad.user_id
         <where>
+            <!--模糊用户名-->
             <if test="map.map.get('userName')!=null and map.map.get('userName')!='' ">
                 and (us.user_name LIKE CONCAT('%','${map.map.get('userName')}','%' )
                 or us.user_phone LIKE CONCAT('%','${map.map.get('userName')}','%' ))
             </if>
+            <!--性别-->
             <if test="map.map.get('userSex')!=null and map.map.get('userSex')!=''">
                 and (us.user_sex ='${map.map.get('userSex')}' )
             </if>
         </where>
-
-
     </select>
 
     <!--多表含有其他字段的字段的额外字段-->
@@ -52,9 +53,8 @@
 
              SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
                 </select>-->
-
+    <!--多表多字段的映射,注意直接使用的Map接收  处理方式2(字段改为统计数量)-->
     <select id="getBaseMap2" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
-
          SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
             </select>
     <!--就是新增一个字段(统计地址数量)映射addressCount-->

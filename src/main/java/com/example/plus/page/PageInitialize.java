@@ -33,14 +33,10 @@ public class PageInitialize {
                 map.put(entry.getKey(), entry.getValue());
             }
             pageCondition.setMap(map);
-
             return pageCondition;
-
         } catch (Exception e) {
             log.error("分页初始化错误,请检查参数" + e.getMessage());
             return null;
         }
-
-
     }
 }
