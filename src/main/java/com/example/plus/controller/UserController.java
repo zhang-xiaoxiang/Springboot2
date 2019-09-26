@@ -106,17 +106,20 @@ public class UserController {
         return ResultData.conditions(userService.removeById(user.getUserId()));
     }
 
-
-    @GetMapping("/page/single-table")
+    /**
+     * 用户单表分页查询
+     * @param pageRequest
+     * @return
+     */
+    @GetMapping("/user/page/single-table")
     public Result getUserPage(@RequestBody PageRequest pageRequest) {
         /**
          * 分页请求还原json格式(@RequestBody把json转成了java对象,所以为了需要就还原一下)
          */
-        PageCondition condition = PageInitialize.getPageInitializeUtil(pageRequest.getPageCondition());
-        log.info("查询条件condition===>" + condition);
+        PageInitialize.getPageInitializeUtil(pageRequest.getPageCondition());
         PageResponse pageResponse = userService.getUserPage(pageRequest);
-        Result result = ResultData.success("查询用户信心成功!", pageResponse);
-        return result;
+        return ResultData.success("查询用户信心成功!", pageResponse);
+
 
     }
 

@@ -7,21 +7,23 @@
             parameterType="com.example.plus.page.PageCondition">
         select * from user
         <where>
-
+            <!-- 模糊用户名(注意注释方式是XML的)-->
             <if test="map.map.get('userName')!=null and map.map.get('userName')!='' ">
                 and (user_name LIKE CONCAT('%','${map.map.get('userName')}','%' )
                 or user_phone LIKE CONCAT('%','${map.map.get('userName')}','%' ))
             </if>
+            <!-- 性别-->
             <if test="map.map.get('userSex')!=null and map.map.get('userSex')!=''">
                 and (user_sex ='${map.map.get('userSex')}' )
             </if>
-
+            <!-- 地址-->
             <if test="map.map.get('userSite')!=null and map.map.get('userSite')!=''">
                 and (user_site ='${map.map.get('userSite')}' )
             </if>
 
             <if test="map.map.get('startTime')!=null and map.map.get('startTime')!='' and map.map.get('endTime')!=null and map.map.get('endTime')!=''">
-                and (user_date_birth BETWEEN CONCAT('${map.map.get('startTime')}') AND
+                -- 创建时间
+                and (create_time BETWEEN CONCAT('${map.map.get('startTime')}') AND
                 CONCAT('${map.map.get('endTime')}' ))
             </if>
         </where>
