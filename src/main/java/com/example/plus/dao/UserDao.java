@@ -1,7 +1,9 @@
 package com.example.plus.dao;
 
+import com.example.plus.entity.Address;
 import com.example.plus.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.plus.entity.UserDto;
 import com.example.plus.page.PageCondition;
 import com.example.plus.result.BaseEntity;
 
@@ -43,4 +45,25 @@ public interface UserDao extends BaseMapper<User> {
      * @return
      */
     Map getUserMap(String userId);
+    /**
+     * 查询用户地址(主要测试实体类封装List的处理)
+     *
+     * @param userId
+     * @return
+     */
+    UserDto userAddressList(String userId);
+
+    /**
+     * 根据用户ID查询地址列表
+     * @param userId
+     * @return
+     */
+    List<Address> getAddressList(String userId);
+
+    /**
+     * 查询添加过字段的单表
+     * @param id
+     * @return
+     */
+    Map userMoreById(String id);
 }

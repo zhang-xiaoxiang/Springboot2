@@ -12,7 +12,7 @@ http://localhost:8080/user/page/single-table
     }
 }
 
-多条件分页
+多条件分页  "userName": "张"不传会产生笛卡尔积
 {
     "pageNavigation": {
         "pageNum": 1,

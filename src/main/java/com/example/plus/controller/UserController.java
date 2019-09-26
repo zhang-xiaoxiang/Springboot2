@@ -1,8 +1,11 @@
 package com.example.plus.controller;
 
 
+import com.alibaba.fastjson.parser.deserializer.AbstractDateDeserializer;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
+import com.example.plus.entity.Address;
 import com.example.plus.entity.User;
+import com.example.plus.entity.UserDto;
 import com.example.plus.exception.MyException;
 import com.example.plus.page.PageCondition;
 import com.example.plus.page.PageRequest;
@@ -16,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Wrapper;
+import java.util.List;
 import java.util.Map;
 
 
@@ -111,5 +115,35 @@ public class UserController {
 
     }
 
+    /**
+     * 查询用户地址(主要测试实体类封装List的处理)
+     *
+     * @param user
+     * @return
+     */
+    @GetMapping("/user-address-list")
+    public Result userAddressList(@RequestBody User user) {
+        UserDto userDto = userService.userAddressList(user.getUserId());
+        return ResultData.success("查询用户地址成功!", userDto);
+    }
+
+
+    /**
+     * 查询用户地址(主要测试实体类封装List的处理)----新的方式
+     *
+     * @param user
+     * @return
+     */
+    @GetMapping("/user-address-list-new")
+    public Result userAddressListNew(@RequestBody User user) {
+        Map map = userService.userAddressListNew(user.getUserId());
+        return ResultData.success("查询用户地址成功!", map);
+    }
+
+    @GetMapping("/get-address-list")
+    public Result getAddressList(@RequestBody User user) {
+        List<Address> addresses = userService.getAddressList( user.getUserId());
+        return ResultData.success("查询用户地址列表成功!", addresses);
+    }
 
 }

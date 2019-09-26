@@ -46,18 +46,36 @@
 
     <!--多表含有其他字段的字段的额外字段-->
 
-<!--        <select id="getBaseMap2" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
+    <!--        <select id="getBaseMap2" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
 
-         SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
-            </select>-->
+             SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
+                </select>-->
 
     <select id="getBaseMap2" resultType="java.util.Map" parameterType="com.example.plus.page.PageCondition">
 
          SELECT us.*,ad.address_region,(SELECT count(ad.address_id)) as totalNum FROM user as us left JOIN address as ad ON us.user_id='${map.map.get('userId')}' and ad.user_id='${map.map.get('userId')}'
             </select>
     <!--就是新增一个字段(统计地址数量)映射addressCount-->
-    <select id="getUserMap" resultType="java.util.Map" >
+    <select id="getUserMap" resultType="java.util.Map">
         SELECT us.*,(select count(address_id)  from address  where user_id=#{userId}) as addressCount from user as us where us.user_id=#{userId}
+    </select>
+
+
+    <!--查询用户地址(主要测试实体类封装List的处理)-->
+    <select id="userAddressList" resultType="com.example.plus.entity.UserDto">
+
+    </select>
+
+
+    <!--根据用户ID查询地址列表-->
+    <select id="getAddressList" resultType="com.example.plus.entity.Address">
+        select * from address where user_id=#{userId}
+    </select>
+
+    <!--查询添加过字段的单表-->
+    <select id="userMoreById" resultType="java.util.Map">
+         select user.*,(SELECT count(address_id) from address where user_id=#{id}) as addressTotal  from user  where user_id=#{id}
+
     </select>
 
 

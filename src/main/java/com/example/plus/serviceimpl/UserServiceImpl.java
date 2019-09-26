@@ -1,8 +1,10 @@
 package com.example.plus.serviceimpl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.plus.entity.Address;
 import com.example.plus.entity.User;
 import com.example.plus.dao.UserDao;
+import com.example.plus.entity.UserDto;
 import com.example.plus.page.MybatisResultMap;
 import com.example.plus.page.PageRequest;
 import com.example.plus.page.PageResponse;
@@ -34,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     private PageResponse pageResponse;
 
     /**
-     * 根据用户ID查询用户详情
+     * 根据用户ID查询用户详情---使用map方式
      *
      * @param id
      * @return
@@ -46,6 +48,18 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         User user = userDao.selectById(id);
         System.out.println(user);
         return user;
+    }
+
+    /**
+     * 根据用户ID查询用户详情--用于新的方式
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Map userMoreById(String id) {
+       Map userMap=userDao.userMoreById( id);
+        return userMap;
     }
 
     /**
@@ -135,5 +149,55 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
 
 
         return user;
+    }
+
+    /**
+     * 查询用户地址(主要测试实体类封装List的处理)---常规处理
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserDto userAddressList(String userId) {
+        User user = userDao.selectById(userId);
+        UserDto userDto=new UserDto();
+        userDto.setUser(user);
+        List<Address> addressList = userDao.getAddressList(userId);
+        userDto.setAddresses(addressList);
+        return userDto;
+    }
+
+
+
+
+
+
+
+    /**
+     * 根据ID查询地址列表
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Address> getAddressList(String userId) {
+        List<Address> addressList = userDao.getAddressList(userId);
+        return addressList;
+    }
+
+    /**
+     * 查询用户地址(主要测试实体类封装List的处理)---新方式
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public Map userAddressListNew(String userId) {
+        Map map=new HashMap(16);
+        map.put("user",userDao.userMoreById(userId));
+
+        map.put("address",userDao.getAddressList(userId));
+        //下面可以封装订单等等....和上面类似
+        return map;
     }
 }

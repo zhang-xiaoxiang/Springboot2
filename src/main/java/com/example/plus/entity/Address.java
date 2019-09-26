@@ -2,7 +2,9 @@ package com.example.plus.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -25,6 +27,7 @@ public class Address implements Serializable {
     /**
      * 收货地址表主键id
      */
+    @TableId
     private String addressId;
 
     /**
@@ -60,7 +63,7 @@ public class Address implements Serializable {
     /**
      * 时间
      */
-    private LocalDateTime addressTime;
+    private Date addressTime;
 
 
 }
