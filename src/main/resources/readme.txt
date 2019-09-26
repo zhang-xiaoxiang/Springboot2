@@ -11,3 +11,16 @@ http://localhost:8080/user/page/single-table
         }
     }
 }
+
+多条件分页
+{
+    "pageNavigation": {
+        "pageNum": 1,
+        "pageSize": 3
+    },
+    "pageCondition": {
+        "map": {
+            "userName": "张"
+        }
+    }
+}
