@@ -31,7 +31,7 @@ public class PageResponse<T> {
     public PageResponse getResultDataVO(PageInfo pageInfo) {
         PageResponse pageResponse = new PageResponse();
         PageDetails pageDetails = new PageDetails();
-        pageDetails.setPageNum(pageInfo.getPageNum());
+        pageDetails.setPageNumber(pageInfo.getPageNum());
         pageDetails.setPageSize(pageInfo.getPageSize());
         pageDetails.setTotal(pageInfo.getTotal());
         pageResponse.setPageDataList(pageInfo.getList());

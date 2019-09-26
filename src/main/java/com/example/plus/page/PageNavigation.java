@@ -13,7 +13,7 @@ public class PageNavigation {
     /**
      * 当前页(使用int可以有个默认值,但是是0,这里直接默认起始页为1,所以使用Integer,都可以使用)
      */
-    private Integer pageNum = 1;
+    private Integer pageNumber = 1;
     /**
      * 每页记录数
      */

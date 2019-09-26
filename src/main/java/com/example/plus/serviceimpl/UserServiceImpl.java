@@ -73,7 +73,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         /**
          * 分页辅助类,起始页和每页大小
          */
-        PageHelper.startPage(pageRequest.getPageNavigation().getPageNum(), pageRequest.getPageNavigation().getPageSize());
+        PageHelper.startPage(pageRequest.getPageNavigation().getPageNumber(), pageRequest.getPageNavigation().getPageSize());
         /**
          * 返回结果可以是多表联查的结果UserDto(最简单就是单表的),根据条件去数据库查询
          */
@@ -98,7 +98,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
      */
     @Override
     public PageResponse getUseralliancePage(PageRequest pageRequest) {
-        Page page = PageHelper.startPage(pageRequest.getPageNavigation().getPageNum(), pageRequest.getPageNavigation().getPageSize());
+        Page page = PageHelper.startPage(pageRequest.getPageNavigation().getPageNumber(), pageRequest.getPageNavigation().getPageSize());
         List<Map<String, Object>> baseMap = userDao.getBaseMap(pageRequest.getPageCondition());
         List<BaseEntity> entityList = MybatisResultMap.getResultMap(baseMap);
         PageInfo<BaseEntity> pageInfo = new PageInfo<>(entityList);
@@ -123,7 +123,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
      */
     @Override
     public PageResponse getUseralliancePage2(PageRequest pageRequest) {
-        Page page = PageHelper.startPage(pageRequest.getPageNavigation().getPageNum(), pageRequest.getPageNavigation().getPageSize());
+        Page page = PageHelper.startPage(pageRequest.getPageNavigation().getPageNumber(), pageRequest.getPageNavigation().getPageSize());
         List<Map<String, Object>> baseMap2 = userDao.getBaseMap2(pageRequest.getPageCondition());
         List<BaseEntity> entityList = MybatisResultMap.getResultMap(baseMap2);
         PageInfo<BaseEntity> pageInfo = new PageInfo<>(entityList);

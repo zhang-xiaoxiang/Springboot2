@@ -15,7 +15,7 @@ public class PageDetails {
     /**
      * 当前页
      */
-    private Integer pageNum;
+    private Integer pageNumber;
 
     /**
      * 每页的数量
@@ -33,7 +33,7 @@ public class PageDetails {
      */
     public PageDetails getPageDetails(PageInfo pageInfo) {
         PageDetails pageDetails = new PageDetails();
-        pageDetails.setPageNum(pageInfo.getPageNum());
+        pageDetails.setPageNumber(pageInfo.getPageNum());
         pageDetails.setPageSize(pageInfo.getPageSize());
         pageDetails.setTotal(pageInfo.getTotal());
         return pageDetails;
