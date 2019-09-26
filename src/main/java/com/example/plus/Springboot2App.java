@@ -22,9 +22,9 @@ public class Springboot2App {
         SpringApplication.run(Springboot2App.class, args);
         log.info("mybatis-plus 入门,官方文档");
         System.out.println("https://mp.baomidou.com/");
-        System.out.println("根据用户ID查询  http://localhost:8080/user/get");
-        System.out.println("根据用户ID查询  http://localhost:8080/user/info/00");
-        System.out.println("单表条件分页  http://localhost:8080/user/page/single-table");
+        System.out.println("根据用户ID查询  http://localhost:8080/api/v1/user/get");
+        System.out.println("REST操作用户   http://localhost:8080/api/v1/user");
+        System.out.println("单表条件分页  http://localhost:8080/api/v1/user/page/single-table");
     }
 
 }

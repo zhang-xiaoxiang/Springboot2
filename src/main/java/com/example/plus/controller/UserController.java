@@ -22,33 +22,43 @@ import java.util.Map;
 
 
 /**
- * <p>
  * 客户端用户表 前端控制器
- * </p>
  *
  * @author zhangxiaoxiang
  * @since 2019-07-04
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1")
 @Slf4j
 @CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
+    //条件分页辅助
     @Autowired
     private PageCondition pageCondition;
 
     /**
-     * 根据Id查询用户
+     * 根据Id查询用户 json格式
      *
      * @param user
      * @return
      */
-    @RequestMapping("/get")
-    public Object getUser(@RequestBody User user) {
-        log.info("注意入参是json格式的才行: " + user.getUserId());
-        return userService.getUser(user.getUserId());
+    @GetMapping("/user")
+    public Result getUser(@RequestBody User user) {
+        //这里不用处理异常,有全局拦截异常的
+        return ResultData.success("根据id查询用户成功!", userService.getUser(user.getUserId()));
+    }
+
+    /**
+     * REST风格  根据Id查询用户
+     *
+     * @param userid
+     * @return
+     */
+    @GetMapping("/user/{userid}")
+    public Result getUser(@PathVariable("userid") String userid) {
+        return ResultData.success("REST风格 根据id查询用户成功!", userService.getUser(userid));
     }
 
     /**
@@ -57,32 +67,25 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping("/add")
+    @PostMapping("/user")
     public Result add(@RequestBody User user) {
+        //这里写业务代码是因为我要使用 数据库提供的通用方法,
+        // 不用写dao,xml,service以及实现类impl,所以这里还是会涉及到一定的业务逻辑代码
         user.setUserId(IdWorker.getSimpleId());
         user.setCreateTime(new Date());
         user.setUserDateBirth(new Date());
-        if (userService.save(user)) {
-            return ResultData.success("添加成功!");
-        } else {
-            return ResultData.error("添加失败1");
-        }
+        return  ResultData.success("添加成功!");
     }
 
-
     /**
-     * REST风格
+     * 根据ID修改用户
      *
-     * @param userid
+     * @param user
      * @return
      */
-    @GetMapping("/info/{userid}")
-    public Object getUser(@PathVariable("userid") String userid) {
-        log.info("这种REST风格可以直接在接口传参数 ");
-        //模拟异常
-        // int i=1/0;
-        // throw new MyException("自定义异常哈!");
-        return userService.getUser(userid);
+    @PutMapping("/user")
+    public Result upd(@RequestBody User user) {
+        return ResultData.conditions(userService.updateById(user));
     }
 
 
