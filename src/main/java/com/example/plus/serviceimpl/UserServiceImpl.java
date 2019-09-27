@@ -101,10 +101,13 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     public PageResponse getUserPage2(PageRequest pageRequest) {
         PageHelper.startPage(pageRequest.getPageNavigation().getPageNumber(), pageRequest.getPageNavigation().getPageSize());
         //查询出所有用户
-        //  查询所有用户的地址
-        // 组装DTO
-        // 分页
-        return null;
+        List<Map<String, Object>> baseMap2 = userDao.selectUserList3(pageRequest.getPageCondition());
+        //目前查询到的是所有集合
+        System.out.println("=====>"+baseMap2);
+        PageInfo pageInfo = new PageInfo<>(baseMap2);
+        pageInfo.setList(baseMap2);
+
+        return pageResponse.getResultDataVO(pageInfo);
     }
 
     /**

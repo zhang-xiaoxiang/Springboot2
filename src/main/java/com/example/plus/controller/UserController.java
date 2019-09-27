@@ -122,7 +122,7 @@ public class UserController {
     }
 
     /**
-     *用户分页带地址列表的
+     *用户分页带地址列表的-----待优化
      * @param pageRequest
      * @return
      */
@@ -130,7 +130,6 @@ public class UserController {
     public Result userAddressListNew2(@RequestBody PageRequest pageRequest) {
         PageInitialize.getPageInitializeUtil(pageRequest.getPageCondition());
         PageResponse pageResponse = userService.getUserPage2(pageRequest);
-        //todo
         return ResultData.success("查询用户地址分页成功!", pageResponse);
     }
 

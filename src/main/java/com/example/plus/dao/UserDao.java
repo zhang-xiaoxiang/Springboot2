@@ -37,6 +37,13 @@ public interface UserDao extends BaseMapper<User> {
      */
     List<UserDto> selectUserList2(PageCondition pageCondition);
 
+    /**
+     * 使用map处理分页的 用户信息带地址列表地址
+     * @param pageCondition
+     * @return
+     */
+    List<Map<String,Object>> selectUserList3(PageCondition pageCondition);
+
 
     // List<Map<String,Object>> getBaseMap(PageCondition pageCondition);
     List<Map<String, Object>> getBaseMap(PageCondition pageCondition);
