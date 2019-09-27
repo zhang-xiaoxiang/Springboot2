@@ -165,8 +165,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
     @Override
     public Map getUserMap(String userId) {
         Map user = userDao.getUserMap(userId);
-
-
         return user;
     }
 
@@ -186,19 +184,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         return userDto;
     }
 
-
-    /**
-     * 根据ID查询地址列表
-     *
-     * @param userId
-     * @return
-     */
-    @Override
-    public List<Address> getAddressList(String userId) {
-        List<Address> addressList = userDao.getAddressList(userId);
-        return addressList;
-    }
-
     /**
      * 查询用户地址(主要测试实体类封装List的处理)---新方式
      *
@@ -215,4 +200,19 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         //下面可以封装订单等等....和上面类似
         return map;
     }
+
+
+    /**
+     * 根据ID查询地址列表
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Address> getAddressList(String userId) {
+        List<Address> addressList = userDao.getAddressList(userId);
+        return addressList;
+    }
+
+
 }

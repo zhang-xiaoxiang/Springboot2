@@ -122,7 +122,7 @@ public class UserController {
     }
 
     /**
-     *用户分页带地址列表的-----待优化
+     *用户分页带地址列表的(多表)-----待优化
      * @param pageRequest
      * @return
      */
@@ -134,7 +134,8 @@ public class UserController {
     }
 
     /**
-     * 查询用户地址列表 -----常规方式(封装一个javabean去接收mybatis的结果集)
+     * 查询用户地址列表(多表) -----常规方式
+     * (2次DAO操作,封装一个javabean实体类去接收mybatis的结果集)
      *
      * @param user
      * @return
@@ -147,6 +148,7 @@ public class UserController {
 
     /**
      * 查询用户地址(主要测试实体类封装List的处理)----新的方式
+     * (2次DAO封装map,封装一个javabean实体类去接收mybatis的结果集)
      *
      * @param user
      * @return
@@ -209,7 +211,7 @@ public class UserController {
 
 
     /**
-     *
+     * 备用的,这个属于地址模块的(不重要的接口)
      * @param user
      * @return
      */
