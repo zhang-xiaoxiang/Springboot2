@@ -63,7 +63,7 @@ public class CodeGenerator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://localhost:3306/lvyou?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.jdbc.Driver");//注意mysql8
         dsc.setUsername("root");
         dsc.setPassword("root");
         mpg.setDataSource(dsc);
@@ -72,6 +72,7 @@ public class CodeGenerator {
         PackageConfig pc = new PackageConfig();
         //pc.setModuleName(scanner("单模块不用配置"));
         pc.setParent("com.example.plus");
+        pc.setMapper("dao");//我喜欢叫dao
         mpg.setPackageInfo(pc);
 
         // 自定义配置
